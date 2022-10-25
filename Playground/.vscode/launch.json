@@ -5,7 +5,7 @@
             "type": "al",
             "request": "launch",
             "name": "Local Sandbox (bcdev)",
-            "server": "http://bcdev",
+            "server": "http://bc",
             "serverInstance": "BC",
             "port": 7049,
             "tenant": "default",
