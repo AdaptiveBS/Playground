@@ -3,13 +3,13 @@
     "name":  "Playground",
     "publisher":  "AdaptiveNav",
     "version":  "1.0.0.0",
-    "brief":  "",
-    "description":  "",
-    "privacyStatement":  "",
-    "EULA":  "",
-    "help":  "",
-    "url":  "",
-    "logo":  "",
+    "brief": "hello app",
+    "description": "hello app",
+    "privacyStatement": "https://justjewelrysoftware.com",
+    "EULA": "https://justjewelrysoftware.com",
+    "help": "https://justjewelrysoftware.com",
+    "url": "https://justjewelrysoftware.com",
+    "logo": "Resources/App.png",
     "dependencies":  [
 
                      ],
@@ -28,5 +28,11 @@
                                    "allowDebugging":  true,
                                    "allowDownloadingSource":  false,
                                    "includeSourceInSymbolFile":  false
-                               }
+                               },
+    "contextSensitiveHelpUrl" : "https://adaptivenav.com",
+    "features": [
+        "NoImplicitWith",
+        "TranslationFile"
+      ],
+    "runtime": "10.0"
 }
