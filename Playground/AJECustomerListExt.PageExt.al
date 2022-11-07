@@ -7,5 +7,6 @@ pageextension 37077600 "AJE CustomerListExt" extends "Customer List"
     trigger OnOpenPage();
     begin
         Message('App published: Hello world');
+        Message('Hi');
     end;
 }
