@@ -6,6 +6,7 @@
     "appFolders": [],
     "testFolders": [],
     "bcptTestFolders": [],
-    "keyVaultName" : "BCApp-KeyVault"
+    "keyVaultName" : "BCApp-KeyVault",
+    "gitHubRunner" : "self-hosted"
     
 }
