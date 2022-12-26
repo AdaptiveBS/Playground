@@ -5,5 +5,7 @@
     ],
     "appFolders": [],
     "testFolders": [],
-    "bcptTestFolders": []
+    "bcptTestFolders": [],
+    "keyVaultName" : "BCApp-KeyVault"
+    
 }
