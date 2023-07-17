@@ -1,4 +1,6 @@
-name: Create a new performance test app
+﻿name: 'Create a new performance test app'
+
+run-name: "Create a new performance test app in [${{ github.ref_name }}]"
 
 on:
   workflow_dispatch:
@@ -37,24 +39,30 @@ permissions:
 
 defaults:
   run:
-    shell: PowerShell
+    shell: powershell
+
+env:
+  ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
+  ALGoRepoSettings: ${{ vars.ALGoRepoSettings }}
 
 jobs:
   CreatePerformanceTestApp:
     runs-on: [ windows-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v2.0
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v3.1
         with:
+          shell: powershell
           eventId: "DO0102"
 
       - name: Creating a new test app
-        uses: microsoft/AL-Go-Actions/CreateApp@v2.0
+        uses: microsoft/AL-Go-Actions/CreateApp@v3.1
         with:
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           project: ${{ github.event.inputs.project }}
           type: 'Performance Test App'
@@ -67,7 +75,8 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v2.0
+        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v3.1
         with:
+          shell: powershell
           eventId: "DO0102"
           telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}

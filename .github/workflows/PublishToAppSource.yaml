@@ -1,4 +1,4 @@
-name: Publish To AppSource
+﻿name: ' Publish To AppSource'
 
 on:
   workflow_dispatch:
@@ -7,6 +7,10 @@ on:
         description: App version to deliver to AppSource (current, prerelease, draft, latest or version number)
         required: false
         default: 'current'
+      projects:
+        description: Projects to publish to AppSource if the repository is multi-project. Default is *, which will publish all projects to AppSource.
+        required: false
+        default: '*'
       GoLive:
         description: Promote AppSource App to go live if it passes technical validation? (Y/N)
         required: false
@@ -18,7 +22,11 @@ permissions:
 
 defaults:
   run:
-    shell: PowerShell
+    shell: powershell
+
+env:
+  ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
+  ALGoRepoSettings: ${{ vars.ALGoRepoSettings }}
 
 jobs:
   Initialization:
@@ -27,12 +35,13 @@ jobs:
       telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v2.0
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v3.1
         with:
+          shell: powershell
           eventId: "DO0103"
 
   Deliver:
@@ -41,37 +50,42 @@ jobs:
     name: Deliver to AppSource
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Read settings
-        uses: microsoft/AL-Go-Actions/ReadSettings@v2.0
+        uses: microsoft/AL-Go-Actions/ReadSettings@v3.1
         with:
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
 
       - name: Read secrets
-        uses: microsoft/AL-Go-Actions/ReadSecrets@v2.0
+        uses: microsoft/AL-Go-Actions/ReadSecrets@v3.1
         env:
           secrets: ${{ toJson(secrets) }}
         with:
+          shell: powershell
           settingsJson: ${{ env.Settings }}
-          secrets: 'AppSourceContext'
+          secrets: 'appSourceContext'
 
       - name: DeliveryContext
         id: deliveryContext
         run: |
-          $contextName = 'AppSourceContext'
+          $ErrorActionPreference = "STOP"
+          Set-StrictMode -version 2.0
+          $contextName = 'appSourceContext'
           $deliveryContext = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String([System.Environment]::GetEnvironmentVariable($contextName)))
-          Write-Host "::set-output name=deliveryContext::$deliveryContext"
-          Write-Host "set-output name=deliveryContext::$deliveryContext"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "deliveryContext=$deliveryContext"
+          Write-Host "deliveryContext=$deliveryContext"
 
       - name: Deliver
-        uses: microsoft/AL-Go-Actions/Deliver@v2.0
+        uses: microsoft/AL-Go-Actions/Deliver@v3.1
         env:
           deliveryContext: '${{ steps.deliveryContext.outputs.deliveryContext }}'
         with:
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           type: 'Release'
-          projects: '*'
+          projects: ${{ github.event.inputs.projects }}
           deliveryTarget: 'AppSource'
           artifacts: ${{ github.event.inputs.appVersion }}
           goLive: ${{ github.event.inputs.goLive }}
@@ -82,11 +96,12 @@ jobs:
     needs: [ Initialization, Deliver ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v2.0
+        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v3.1
         with:
+          shell: powershell
           eventId: "DO0103"
           telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
