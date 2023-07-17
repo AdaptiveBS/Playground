@@ -7,6 +7,10 @@
     "testFolders": [],
     "bcptTestFolders": [],
     "keyVaultName" : "BCApp-KeyVault",
-    "gitHubRunner" : "self-hosted"
+    "gitHubRunner" : "self-hosted",
+    "UseCompilerFolder" : true,
+    "doNotPublishApps" : true,
+    "vsixFile" : "https://bcappstorage.blob.core.windows.net/compilers/22.0.54157/ALLanguage.zip"
+    
     
 }
