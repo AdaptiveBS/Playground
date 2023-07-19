@@ -3,21 +3,25 @@
     "AppSourceCopMandatoryAffixes": [
         "AJE"
     ],
-    "appFolders": [ "Playground" , ".", "fsdkfs", "hsdfsd" ],
+    "appFolders": [
+        "Playground",
+        ".",
+        "fsdkfs",
+        "hsdfsd"
+    ],
     "testFolders": [],
     "bcptTestFolders": [],
-    "keyVaultName" : "BCApp-KeyVault",
-    "gitHubRunner" : "self-hosted",
-    "UseCompilerFolder" : true,
-    "doNotPublishApps" : true,
-    "vsixFile" : "https://bcappstorage.blob.core.windows.net/compilers/22.0.54157/ALLanguage.zip",
+    "keyVaultName": "BCApp-KeyVault",
+    "gitHubRunner": "self-hosted",
+    "UseCompilerFolder": true,
+    "doNotPublishApps": true,
+    "vsixFile": "https://bcappstorage.blob.core.windows.net/compilers/22.0.54157/ALLanguage.zip",
     "PartnerTelemetryConnectionString": "InstrumentationKey=7f2e397b-f20c-4698-9cee-124587f18a25;IngestionEndpoint=https://eastus2-3.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus2.livediagnostics.monitor.azure.com/",
-    "type":  "PTE",
-    "Environments":  [
-                         "QA"
-                     ],
+    "type": "PTE",
+    "Environments": [
+        "QA"
+    ],
     "DeployToSX_QA": {
         "EnvironmentName": "QA"
     }
-
 }
