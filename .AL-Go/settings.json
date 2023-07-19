@@ -3,7 +3,7 @@
     "AppSourceCopMandatoryAffixes": [
         "AJE"
     ],
-    "appFolders": [ "Playground" , "." ],
+    "appFolders": [ "Playground" , ".", "fsdkfs", "hsdfsd" ],
     "testFolders": [],
     "bcptTestFolders": [],
     "keyVaultName" : "BCApp-KeyVault",
