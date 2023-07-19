@@ -4,10 +4,7 @@
         "AJE"
     ],
     "appFolders": [
-        "Playground",
-        ".",
-        "fsdkfs",
-        "hsdfsd"
+        "Playground"
     ],
     "testFolders": [],
     "bcptTestFolders": [],
@@ -23,5 +20,6 @@
     ],
     "DeployToSX_QA": {
         "EnvironmentName": "QA"
-    }
+    },
+    "UseProjectDependencies": true
 }
