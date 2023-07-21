@@ -38,13 +38,13 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: AdaptiveBS/AL-Go-Actions/WorkflowInitialize@main
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v3.1
         with:
           shell: powershell
           eventId: "DO0090"
 
       - name: Add existing app
-        uses: AdaptiveBS/AL-Go-Actions/AddExistingApp@main
+        uses: microsoft/AL-Go-Actions/AddExistingApp@v3.1
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -54,7 +54,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: AdaptiveBS/AL-Go-Actions/WorkflowPostProcess@main
+        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v3.1
         with:
           shell: powershell
           eventId: "DO0090"
